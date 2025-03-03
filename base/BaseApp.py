@@ -2,6 +2,7 @@ import logging
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
 
 
 class BasePage:
@@ -56,7 +57,7 @@ class BasePage:
             return False
 
     # Вспомогательный элемент для ввода текста
-    def enter_text_into_field(self, locator, word, description=None):
+    def enter_text_into_field(self, locator, word, description=None, press_enter=False):
         if description:
             element_name = description
         else:
@@ -69,7 +70,9 @@ class BasePage:
         try:
             field.clear()
             field.send_keys(word)
-            logging.info(f"Entered '{word}' into {element_name}")
+            if press_enter:
+                field.send_keys(Keys.ENTER)
+                logging.info(f"Pressed ENTER after entering '{word}' into {element_name}")
         except:
             logging.exception(f"Exception while operation with {locator}")
             return False
