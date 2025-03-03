@@ -40,9 +40,23 @@ def test_filter_organization_level(browser, login):
         # assert test_page.get_check_organization_albion() == 'ООО "АЛЬБИОН"'
         if not check.equal(test_page.get_check_organization_albion(), 'ООО "АЛЬБИОН"', 'Проверка успешной фильтрации орг.'):
             save_screenshot_on_check_fail(browser, 'Проверка Альбиона')
+    with allure.step("Проверка фильтрации по состоянию, периодичности и периоду"):
+        test_page.click_status_btn()
+        test_page.click_approved_btn()
+        test_page.click_periodicity_btn()
+        test_page.click_monthly_btn()
+        test_page.click_period_btn()
+        test_page.click_year_calendar_btn()
+        test_page.enter_starting_year_calendar('2054')
+        test_page.enter_end_year_calendar('2054')
+    with allure.step("Проверка успешной фильтрации по состоянию и периоду"):
+        if not check.equal(test_page.get_check_sort_status(), "Утвержден", "Выбран статус 'Утвержден'"):
+            save_screenshot_on_check_fail(browser, "Проверка состояния")
+        if not check.is_true("2054" in test_page.get_check_sort_period()):
+            save_screenshot_on_check_fail(browser, "Проверка сортировки года")
     logging.info('Закончили тест проверки фильтрации на орг. уровне')
     with allure.step("Сбросить все фильтры в реестре"):
-        test_page.click_reset_filters()
+        test_page.click_reset_filters_btn()
         if not check.equal(test_page.get_check_all_reg(), "РФ", "Проверка сброса всех фильтров"):
             save_screenshot_on_check_fail(browser,"Проверка кнопки сброса фильтров")
 
@@ -60,7 +74,7 @@ def test_filter_district_city_level(browser):
     with allure.step("Выбор региона и района"):
         test_page.click_region_field()
         test_page.click_msk_btn()
-        time.sleep(4)
+        time.sleep(2)
         test_page.click_district_field()
         test_page.click_vostok_btn()
     with allure.step("Выбор района-города"):
@@ -71,7 +85,7 @@ def test_filter_district_city_level(browser):
             save_screenshot_on_check_fail(browser,'Проверка фильтрации по району-города')
     logging.info('Закончили тест проверки фильтрации на уровне район-города')
     with allure.step("Сбросить все фильтры в реестре"):
-        test_page.click_reset_filters()
+        test_page.click_reset_filters_btn()
         if not check.equal(test_page.get_check_all_reg(), "РФ", "Проверка сброса всех фильтров"):
             save_screenshot_on_check_fail(browser,"Проверка кнопки сброса фильтров")
 
@@ -89,7 +103,7 @@ def test_filter_district_level(browser):
     with allure.step("Выбор региона и района"):
         test_page.click_region_field()
         test_page.click_msk_btn()
-        time.sleep(4)
+        time.sleep(2)
         test_page.click_district_field()
         test_page.click_vostok_btn()
     with allure.step("Проверка успешной фильтрации на районном уровне"):
@@ -97,7 +111,7 @@ def test_filter_district_level(browser):
             save_screenshot_on_check_fail(browser,'Проверка фильтрации по району')
     logging.info('Закончили тест проверки фильтрации районного уровня')
     with allure.step("Сбросить все фильтры в реестре"):
-        test_page.click_reset_filters()
+        test_page.click_reset_filters_btn()
         if not check.equal(test_page.get_check_all_reg(), "РФ", "Проверка сброса всех фильтров"):
             save_screenshot_on_check_fail(browser,"Проверка кнопки сброса фильтров")
 
@@ -115,7 +129,7 @@ def test_filter_region_level(browser):
     with allure.step("Выбор региона"):
         test_page.click_region_field()
         test_page.click_msk_btn()
-        time.sleep(4)
+        time.sleep(2)
     with allure.step("Проверка успешной фильтрации на региональном уровне"):
         if not check.equal(test_page.get_check_filter_region(), "г. Москва", "Проверка успешной фильтрации региона"):
             save_screenshot_on_check_fail(browser,'Проверка фильтрации по региону')
