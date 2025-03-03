@@ -1,0 +1,154 @@
+1. Метод для проверки видимости элемента.
+Иногда важно убедиться, что элемент видим на странице, прежде чем с ним взаимодействовать.
+
+def is_element_visible(self, locator, time=10):
+    try:
+        element = WebDriverWait(self.driver, time).until(
+            EC.visibility_of_element_located(locator),
+            message=f"Element {locator} is not visible"
+        )
+        return True
+    except:
+        logging.exception(f"Element {locator} is not visible")
+        return False
+
+Когда использовать?
+* Проверка, что кнопка или поле ввода видимы перед взаимодействием.
+* Например, перед кликом на кнопку.
+
+2. Метод для проверки кликабельности элемента
+Иногда элемент присутствует на странице, но не кликабелен (например, из-за наложения другого элемента).
+
+def is_element_clickable(self, locator, time=10):
+    try:
+        element = WebDriverWait(self.driver, time).until(
+            EC.element_to_be_clickable(locator),
+            message=f"Element {locator} is not clickable"
+        )
+        return True
+    except:
+        logging.exception(f"Element {locator} is not clickable")
+        return False
+
+Когда использовать?
+* Перед кликом на кнопку или ссылку, чтобы избежать ошибок.
+
+3. Метод для получения атрибута элемента
+Иногда нужно получить значение атрибута элемента (например, href, value, src).
+
+def get_element_attribute(self, locator, attribute, time=10):
+    try:
+        element = self.find_element(locator, time)
+        return element.get_attribute(attribute)
+    except:
+        logging.exception(f"Cannot get attribute {attribute} from element {locator}")
+        return None
+
+Когда использовать?
+* Проверка ссылки (href) у кнопки или ссылки.
+* Проверка значения в поле ввода (value).
+
+4. Метод для выбора значения из выпадающего списка
+Selenium не всегда работает с выпадающими списками напрямую. Можно использовать специальный класс Select.
+
+from selenium.webdriver.support.ui import Select
+
+def select_dropdown_option(self, locator, value, time=10):
+    try:
+        dropdown = Select(self.find_element(locator, time))
+        dropdown.select_by_value(value)  # Выбор по значению
+        logging.debug(f"Selected {value} in dropdown {locator}")
+        return True
+    except:
+        logging.exception(f"Cannot select {value} in dropdown {locator}")
+        return False
+
+Когда использовать?
+* Если у тебя есть выпадающий список, и нужно выбрать определенное значение.
+
+5. Метод для работы с чекбоксами
+Иногда нужно проверить состояние чекбокса (отмечен/не отмечен) или изменить его.
+
+def toggle_checkbox(self, locator, check=True, time=10):
+    try:
+        checkbox = self.find_element(locator, time)
+        if (check and not checkbox.is_selected()) or (not check and checkbox.is_selected()):
+            checkbox.click()
+        logging.debug(f"Checkbox {locator} set to {check}")
+        return True
+    except:
+        logging.exception(f"Cannot toggle checkbox {locator}")
+        return False
+
+Когда использовать?
+* Для тестов, где нужно отметить или снять отметку с чекбокса.
+
+6. Метод для переключения между вкладками браузера
+Если твой тест открывает новую вкладку, нужно переключиться на нее.
+
+def switch_to_new_tab(self):
+    try:
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        logging.debug("Switched to new tab")
+        return True
+    except:
+        logging.exception("Cannot switch to new tab")
+        return False
+
+Когда использовать?
+* Тесты, которые открывают внешние ссылки или новые окна.
+
+7. Метод для работы с модальными окнами (алертами)
+Если появляется всплывающее окно (alert), можно обработать его:
+
+def handle_alert(self, accept=True):
+    try:
+        alert = self.driver.switch_to.alert
+        alert_text = alert.text
+        if accept:
+            alert.accept()  # Нажать "OK"
+        else:
+            alert.dismiss()  # Нажать "Отмена"
+        logging.debug(f"Handled alert with text: {alert_text}")
+        return alert_text
+    except:
+        logging.exception("No alert to handle")
+        return None
+
+Когда использовать?
+* Тесты, где нужно подтвердить или отклонить действия в алерте.
+
+8. Метод для проверки наличия текста
+Если нужно проверить, что на странице есть определенный текст:
+
+def is_text_present(self, text, time=10):
+    try:
+        WebDriverWait(self.driver, time).until(
+            EC.text_to_be_present_in_element((By.XPATH, "//*"), text),
+            message=f"Text '{text}' not found on page"
+        )
+        logging.debug(f"Text '{text}' is present on the page")
+        return True
+    except:
+        logging.exception(f"Text '{text}' is not present on the page")
+        return False
+
+Когда использовать?
+* Проверка, что на странице отображается определенное сообщение или заголовок.
+
+9. Метод для скроллинга до элемента
+Если элемент находится вне видимой области, нужно прокрутить страницу:
+
+def scroll_to_element(self, locator):
+    try:
+        element = self.find_element(locator)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        logging.debug(f"Scrolled to element {locator}")
+        return True
+    except:
+        logging.exception(f"Cannot scroll to element {locator}")
+        return False
+
+Когда использовать?
+* Если Selenium не может найти элемент, так как он вне видимости.
+
