@@ -158,7 +158,7 @@ def test_filter_region_level(browser):
         if not check.equal(test_page.get_check_region_lvl(),'Регион', 'Проверка, что находимся на региональном уровне'):
             save_screenshot_on_check_fail(browser, 'Проверка регионального уровня')
     with allure.step("Выбор региона"):
-        time.sleep(1)
+        time.sleep(2)
         test_page.click_region_field()
         test_page.click_msk_btn()
         time.sleep(2)
