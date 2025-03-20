@@ -1,5 +1,4 @@
 import logging
-
 import pytest
 from datetime import datetime
 from selenium import webdriver
@@ -8,7 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 import allure
 from pages.login.login_page import LoginPage
-import pytest_check as check
+
 
 browser_name = "chrome"
 
@@ -32,39 +31,16 @@ def browser():
     driver.quit()
     print("\n🛑 Браузер закрыт")
 
-
-# @pytest.hookimpl(hookwrapper=True, tryfirst=True)
-# def pytest_runtest_makereport(item, call):
-#     outcome = yield
-#     report = outcome.get_result()
-#
-#     if report.when == "call" and report.failed:
-#         driver = item.funcargs.get("browser")
-#         if driver:
-#             try:
-#                 # Формируем уникальное название скриншота
-#                 test_name = item.name  # Название теста
-#                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-#                 screenshot_name = f"{test_name}_error_{timestamp}"
-#
-#                 # Делаем скриншот
-#                 screenshot = driver.get_screenshot_as_png()
-#                 allure.attach(screenshot, name=screenshot_name, attachment_type=allure.attachment_type.PNG)
-#                 print(f"📸 Скриншот '{screenshot_name}' успешно добавлен в Allure!")
-#             except Exception as e:
-#                 print(f"❌ Не удалось сделать скриншот: {e}")
+# Хук для обработки падений тестов (но без скриншотов)
 
 
-# Храним список уже сделанных скриншотов для каждого теста
 _screenshot_made_per_test = {}
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item, call):
-    """Хук для обработки падений тестов (но без скриншотов)"""
     outcome = yield
     report = outcome.get_result()
-
     if report.when == "call" and report.failed:
         test_name = item.name
 
@@ -72,8 +48,8 @@ def pytest_runtest_makereport(item, call):
         _screenshot_made_per_test[test_name] = True
 
 
+# Сохраняет скриншот при каждой ошибке pytest-check, но не завершает тест
 def save_screenshot_on_check_fail(driver, description):
-    """Сохраняет скриншот при каждой ошибке pytest-check, но не завершает тест"""
     try:
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         screenshot_name = f"{description}_error_{timestamp}"
