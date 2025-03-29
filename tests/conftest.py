@@ -1,11 +1,12 @@
 import logging
 import pytest
+import allure
+import pytest_check as check
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-import allure
 from pages.login.login_page import LoginPage
 
 
@@ -79,11 +80,8 @@ def login(browser):
     page.enter_login("1test_np")
     page.enter_password("Test123$")
     page.click_login_button()
+    with allure.step('Проверка успешной авторизации'):
+        if not check.equal(page.get_menu_text(),'Доступные для работы модули:', 'Проверка текста меню'):
+            save_screenshot_on_check_fail(browser, 'Проверка авторизации')
     logging.info('Пользователь ввел логин и пароль. Нажал кнопку входа')
     yield page  # Передаем страницу в тесты
-
-    # test_page.go_to_site()
-    # with allure.step('Авторизация пользователя'):
-    #     test_page.enter_login('1test_np')
-    #     test_page.enter_password('Test123$')
-    #     test_page.click_login_button()
