@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ActionChains
 
 
 class BasePage:
@@ -112,6 +113,34 @@ class BasePage:
             return None
         logging.info(f"We find text {text} in field {element_name}")
         return text
+
+    # Наводим курсор на один элемент и кликаем по другому
+    def hover_and_click(self, hover_locator, click_locator, description=None, time=10):
+        try:
+            hover_element = self.find_element(hover_locator, time)
+            actions = ActionChains(self.driver)
+            actions.move_to_element(hover_element).perform()
+            logging.info(f"Навели курсор на элемент: {hover_locator}")
+
+            target_element = WebDriverWait(self.driver, time).until(
+                EC.element_to_be_clickable(click_locator)
+            )
+            target_element.click()
+            logging.info(f"Клик по элементу: {click_locator}")
+            return True
+        except:
+            logging.exception(f"Не удалось навести на {hover_locator} и кликнуть по {click_locator}")
+            return False
+
+    # Перезагрузка страницы
+    def reload_page(self):
+        try:
+            self.driver.refresh()
+            logging.info("Страница успешно перезагружена")
+            return True
+        except:
+            logging.exception("Ошибка при перезагрузке страницы")
+            return False
 
     # Вспомогательный метод для работы с выпадающими списками
 

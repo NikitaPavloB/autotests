@@ -26,7 +26,7 @@ def test_filter_organization_level(browser, login):
         # assert test_page.get_check_organization_lvl() == 'Организация'
         if not check.equal(test_page.get_check_organization_lvl(),'Организация', 'Проверка, что находимся на орг.уровне'):
             save_screenshot_on_check_fail(browser, 'Проверка уровня организации')
-    time.sleep(4)
+    time.sleep(5)
     with allure.step("Выбор региона и района"):
         test_page.click_region_field()
         test_page.click_msk_btn()
@@ -40,7 +40,7 @@ def test_filter_organization_level(browser, login):
         # assert test_page.get_check_organization_albion() == 'ООО "АЛЬБИОН"'
         if not check.equal(test_page.get_check_organization_albion(), 'ООО "АЛЬБИОН"', 'Проверка успешной фильтрации орг.'):
             save_screenshot_on_check_fail(browser, 'Проверка Альбиона')
-    with allure.step("Проверка фильтрации по состоянию, периодичности и периоду"):
+    with allure.step("Проверка сортировки по состоянию, периодичности и периоду"):
         test_page.click_status_btn()
         test_page.click_approved_btn()
         test_page.click_periodicity_btn()
@@ -50,7 +50,7 @@ def test_filter_organization_level(browser, login):
         test_page.click_year_calendar_btn()
         test_page.enter_starting_year_calendar('2054')
         test_page.enter_end_year_calendar('2054')
-    with allure.step("Проверка успешной фильтрации по состоянию и периоду"):
+    with allure.step("Проверка успешной сортировки по состоянию и периоду"):
         if not check.equal(test_page.get_check_sort_status(), "Утвержден", "Выбран статус 'Утвержден'"):
             save_screenshot_on_check_fail(browser, "Проверка состояния")
         if not check.is_true("2054" in test_page.get_check_sort_period()):
@@ -181,12 +181,4 @@ def test_filter_region_level(browser):
         if not check.is_true("2054" in test_page.get_check_sort_period()):
             save_screenshot_on_check_fail(browser, "Проверка сортировки года")
     logging.info('Закончили тест проверки фильтрации на региональном уровне')
-
-
-
-
-
-
-
-
 
