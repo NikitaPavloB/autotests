@@ -1,0 +1,34 @@
+[32mINFO    [0m root:conftest.py:77 Запустили фикстуру авторизации
+[32mINFO    [0m root:BaseApp.py:66 Send 1test_np to element Поле 'Логин'
+[32mINFO    [0m root:BaseApp.py:66 Send Test123$ to element Поле 'Пароль'
+[32mINFO    [0m root:BaseApp.py:97 Clicked Кнопка 'Войти' button
+[32mINFO    [0m root:BaseApp.py:114 We find text Доступные для работы модули: in field Текст меню после авторизации
+[32mINFO    [0m root:conftest.py:86 Пользователь ввел логин и пароль. Нажал кнопку входа
+[32mINFO    [0m root:test_new_filter_reports.py:16 Запустили тест проверки фильтрации на районном уровне
+[32mINFO    [0m root:BaseApp.py:97 Clicked Иконка 'СТАТ отчетность' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Раздел 'Отчёты организаций Роспотребнадзора' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Кнопка 'Форма №12-23' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Выпадающий список уровней видимости button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Выбор уровня 'Районный' button
+[32mINFO    [0m root:BaseApp.py:114 We find text Район in field Подтверждение уровня 'Районный'
+[32mINFO    [0m root:BaseApp.py:97 Clicked Территория (выпадающий список) button
+[32mINFO    [0m root:BaseApp.py:97 Clicked РФ из выпадающего списка button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Регион (выпадающий список) button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Москва из выпадающего списка button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Район (выпадающий список) button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Восточный район Москва button
+[32mINFO    [0m root:BaseApp.py:114 We find text Восточный in field Успешная проверка фильтрации по району
+[32mINFO    [0m root:BaseApp.py:97 Clicked Поле "Состояние" в реестре отчетов button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Статус 'Утверждён' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Поле "Периодичность" в реестре отчетов button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Периодичность 'Квартальная' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Поле "Период" в реестре отчетов-год button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Календарь фильтр "Год" button
+[32mINFO    [0m root:BaseApp.py:66 Send 2054 to element Поле 'Начальный год'
+[32mINFO    [0m root:BaseApp.py:76 Pressed ENTER after entering '2054' into Поле 'Начальный год'
+[32mINFO    [0m root:BaseApp.py:66 Send 2054 to element Поле 'Конечный год'
+[32mINFO    [0m root:BaseApp.py:76 Pressed ENTER after entering '2054' into Поле 'Конечный год'
+[32mINFO    [0m root:BaseApp.py:114 We find text Утвержден in field Успешная проверка фильтрации по состоянию
+[32mINFO    [0m root:BaseApp.py:114 We find text 1 квартал 2054 года (нарастающий итог) in field Успешная проверка фильтрации по периоду
+[32mINFO    [0m root:test_new_filter_reports.py:59 Закончили тест проверки фильтрации на районном уровне
+[32mINFO    [0m root:BaseApp.py:139 Страница успешно перезагружена
