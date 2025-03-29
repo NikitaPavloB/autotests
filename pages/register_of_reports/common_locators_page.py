@@ -4,7 +4,9 @@ from selenium.webdriver.common.by import By
 
 
 class RegistersCommonLocators:
-    # Уровень видимости
+    # Кнопка входа в СТАТ
+    LOCATOR_ICON_STAT = (By.XPATH, """//div[@class="card"]/child::*[1]""")
+    # Выпадающий список уровней видимости
     LOCATOR_LEVEL = (By.ID, "level")
     # Федеральный уровень
     LOCATOR_LEVEL_CONSOLIDATED = (By.ID, "formLevel_consolidated")
@@ -22,8 +24,6 @@ class RegistersCommonLocators:
     LOCATOR_MSK_BTN = (By.XPATH, """//nz-option-item[@title="г. Москва"]""")
     # Район "Восточный" - Москва
     LOCATOR_VOSTOK_BTN = (By. XPATH, "//nz-option-item[@ng-reflect-title='Восточный']")
-    # Выбор статуса "Утверждён"
-    LOCATOR_APPROVED_BTN = (By.XPATH, """//nz-option-item[@ng-reflect-value = 'es_signed']""")
     # Выпадающий календарь: "Года"
     LOCATOR_YEAR_BTN = (By.XPATH, """//label[@ng-reflect-nz-value = 'Года']""")
     # Выпадающий календарь: "Месяца"
@@ -42,7 +42,15 @@ class RegistersCommonLocators:
     LOCATOR_START_YEAR_FIELD = (By.XPATH, """//input[@placeholder = 'Начальный год']""")
     # Поле "Период" - конечный год
     LOCATOR_END_YEAR_FIELD = (By.XPATH, """//input[@placeholder = 'Год окончания']""")
+    # Проверка сортировки по региону
+    LOCATOR_CHECK_REGION_FIELD = (By.XPATH, """(//a[@class = "invisible_link" and contains(text(), "г. Москва")])[1]""")
+    # Проверка сортировки по району
+    LOCATOR_CHECK_DISTRICT_FIELD = (By.XPATH, """(//a[@class = "invisible_link" and contains(text(), "Восточный")])[1]""")
+    # Выбор статуса "Утверждён"
+    LOCATOR_APPROVED_BTN = (By.XPATH, """//nz-option-item[@ng-reflect-value = 'es_signed']""")
     # Проверка сортировки по состоянию
     LOCATOR_SORT_CHECK_FIELD = (By.XPATH, """(//a[@class = "invisible_link" and contains(text(), "Утвержден")])[1]""")
     # Проверка сортировки по периоду
     LOCATOR_PERIOD_CHECK_FIELD = (By.XPATH, """(//a[@class = "invisible_link" and contains(text(), "2054")])[1]""")
+    # Выбор периодичности "Квартальная"
+    LOCATOR_QUARTERLY_BTN = (By.XPATH, """//nz-option-item[@ng-reflect-value = "quarterly"]""")
