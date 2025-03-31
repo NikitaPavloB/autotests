@@ -45,6 +45,18 @@ class OldRegisterReportsLocators:
     LOCATOR_PERIODICITY_FIELD = (By.XPATH, """//nz-select[@ng-reflect-is-disabled = 'false']""")
     # Выбор периодичности "Ежемесячная"
     LOCATOR_MONTHLY_BTN = (By.XPATH, """//nz-option-item[@ng-reflect-value = 'monthly']""")
+    # Чек-бокс столбца "Состояние"
+    LOCATOR_STATE_CHECKBOX = (By.XPATH, """(//input[@type="checkbox"])[1]""")
+    # Чек-бокс столбца "Регионы"
+    LOCATOR_REGIONALS_CHECKBOX = (By.XPATH, """(//input[@type="checkbox"])[2]""")
+    # Чек-бокс столбца "Номер недели"
+    LOCATOR_WEEK_NUMBER_CHECKBOX = (By.XPATH, """(//input[@type="checkbox"])[3]""")
+    # Чек-бокс столбца "Период"
+    LOCATOR_PERIOD_CHECKBOX = (By.XPATH, """(//input[@type="checkbox"])[4]""")
+    # Чек-бокс столбца "Дата изменения"
+    LOCATOR_DATE_CHANGE_CHECKBOX = (By.XPATH, """(//input[@type="checkbox"])[5]""")
+    # Чек-бокс столбца "Дата создания"
+    LOCATOR_DATE_CREATION_CHECKBOX = (By.XPATH, """(//input[@type="checkbox"])[6]""")
 
 
 class RegisterOldOperationsHelper(BasePage):
