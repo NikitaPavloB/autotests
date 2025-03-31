@@ -4,6 +4,8 @@ import logging
 import allure
 import pytest_check as check
 from tests.conftest import save_screenshot_on_check_fail
+
+
 @allure.feature('Проверка чекбоксов в Настройки отображения')
 @allure.story('Общие сведения')
 def test_analytics_form1(browser, login):
