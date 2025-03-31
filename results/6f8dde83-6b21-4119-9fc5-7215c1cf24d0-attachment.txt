@@ -1,0 +1,110 @@
+[32mINFO    [0m WDM:logger.py:11 ====== WebDriver manager ======
+[32mINFO    [0m WDM:logger.py:11 Get LATEST chromedriver version for google-chrome
+[32mINFO    [0m WDM:logger.py:11 Get LATEST chromedriver version for google-chrome
+[32mINFO    [0m WDM:logger.py:11 Driver [C:\Users\KIND\.wdm\drivers\chromedriver\win64\134.0.6998.165\chromedriver-win32/chromedriver.exe] found in cache
+[32mINFO    [0m root:conftest.py:77 Запустили фикстуру авторизации
+[32mINFO    [0m root:BaseApp.py:66 Send 1test_np to element Поле 'Логин'
+[32mINFO    [0m root:BaseApp.py:66 Send Test123$ to element Поле 'Пароль'
+[32mINFO    [0m root:BaseApp.py:97 Clicked Кнопка 'Войти' button
+[32mINFO    [0m root:BaseApp.py:114 We find text Доступные для работы модули: in field Текст меню после авторизации
+[32mINFO    [0m root:conftest.py:86 Пользователь ввел логин и пароль. Нажал кнопку входа
+[32mINFO    [0m root:test_new_filter_reports.py:16 Запустили тест проверки фильтрации на районном уровне
+[32mINFO    [0m root:BaseApp.py:97 Clicked Иконка 'СТАТ отчетность' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Раздел 'Отчёты организаций Роспотребнадзора' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Кнопка 'Форма №12-23' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Выпадающий список уровней видимости button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Выбор уровня 'Районный' button
+[32mINFO    [0m root:BaseApp.py:114 We find text Район in field Подтверждение уровня 'Районный'
+[1m[31mERROR   [0m root:BaseApp.py:95 Exception with click
+Traceback (most recent call last):
+  File "C:\Users\KIND\rospotrebnadzorTest\base\BaseApp.py", line 93, in click_button
+    button.click()
+  File "C:\Users\KIND\rospotrebnadzorTest\.venv\lib\site-packages\selenium\webdriver\remote\webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\Users\KIND\rospotrebnadzorTest\.venv\lib\site-packages\selenium\webdriver\remote\webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "C:\Users\KIND\rospotrebnadzorTest\.venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\KIND\rospotrebnadzorTest\.venv\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <input autocomplete="off" class="ant-select-selection-search-input ng-untouched ng-pristine ng-valid" ng-reflect-is-disabled="false"> is not clickable at point (267, 154). Other element would receive the click: <div _ngcontent-ng-c4159471128="" class="spinner-panel">...</div>
+  (Session info: chrome=134.0.6998.178)
+Stacktrace:
+	GetHandleVerifier [0x0120C7F3+24435]
+	(No symbol) [0x01192074]
+	(No symbol) [0x010606E3]
+	(No symbol) [0x010AEDD0]
+	(No symbol) [0x010AD174]
+	(No symbol) [0x010AAD17]
+	(No symbol) [0x010AA001]
+	(No symbol) [0x0109E685]
+	(No symbol) [0x010CD7BC]
+	(No symbol) [0x0109E114]
+	(No symbol) [0x010CDA34]
+	(No symbol) [0x010EF20A]
+	(No symbol) [0x010CD5B6]
+	(No symbol) [0x0109C54F]
+	(No symbol) [0x0109D894]
+	GetHandleVerifier [0x015170A3+3213347]
+	GetHandleVerifier [0x0152B0C9+3295305]
+	GetHandleVerifier [0x0152558C+3271948]
+	GetHandleVerifier [0x012A7360+658144]
+	(No symbol) [0x0119B27D]
+	(No symbol) [0x01198208]
+	(No symbol) [0x011983A9]
+	(No symbol) [0x0118AAC0]
+	BaseThreadInitThunk [0x768CFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x779780CE+286]
+	RtlGetAppContainerNamedObjectPath [0x7797809E+238]
+
+[1m[31mERROR   [0m root:BaseApp.py:22 Exception while finding element ('xpath', '//nz-option-item[@title="РФ"]')
+Traceback (most recent call last):
+  File "C:\Users\KIND\rospotrebnadzorTest\base\BaseApp.py", line 16, in find_element
+    element = WebDriverWait(self.driver, time).until(
+  File "C:\Users\KIND\rospotrebnadzorTest\.venv\lib\site-packages\selenium\webdriver\support\wait.py", line 105, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: Can't find element by locator ('xpath', '//nz-option-item[@title="РФ"]')
+Stacktrace:
+	GetHandleVerifier [0x0120C7F3+24435]
+	(No symbol) [0x01192074]
+	(No symbol) [0x010606E3]
+	(No symbol) [0x010A8B39]
+	(No symbol) [0x010A8E8B]
+	(No symbol) [0x010F1AC2]
+	(No symbol) [0x010CD804]
+	(No symbol) [0x010EF20A]
+	(No symbol) [0x010CD5B6]
+	(No symbol) [0x0109C54F]
+	(No symbol) [0x0109D894]
+	GetHandleVerifier [0x015170A3+3213347]
+	GetHandleVerifier [0x0152B0C9+3295305]
+	GetHandleVerifier [0x0152558C+3271948]
+	GetHandleVerifier [0x012A7360+658144]
+	(No symbol) [0x0119B27D]
+	(No symbol) [0x01198208]
+	(No symbol) [0x011983A9]
+	(No symbol) [0x0118AAC0]
+	BaseThreadInitThunk [0x768CFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x779780CE+286]
+	RtlGetAppContainerNamedObjectPath [0x7797809E+238]
+
+[1m[31mERROR   [0m root:BaseApp.py:90 Button РФ из выпадающего списка not found or not clickable
+[32mINFO    [0m root:BaseApp.py:97 Clicked Регион (выпадающий список) button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Москва из выпадающего списка button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Район (выпадающий список) button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Восточный район Москва button
+[32mINFO    [0m root:BaseApp.py:114 We find text Восточный in field Успешная проверка фильтрации по району
+[32mINFO    [0m root:BaseApp.py:97 Clicked Поле "Состояние" в реестре отчетов button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Статус 'Утверждён' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Поле "Периодичность" в реестре отчетов button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Периодичность 'Квартальная' button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Поле "Период" в реестре отчетов-год button
+[32mINFO    [0m root:BaseApp.py:97 Clicked Календарь фильтр "Год" button
+[32mINFO    [0m root:BaseApp.py:66 Send 2054 to element Поле 'Начальный год'
+[32mINFO    [0m root:BaseApp.py:76 Pressed ENTER after entering '2054' into Поле 'Начальный год'
+[32mINFO    [0m root:BaseApp.py:66 Send 2054 to element Поле 'Конечный год'
+[32mINFO    [0m root:BaseApp.py:76 Pressed ENTER after entering '2054' into Поле 'Конечный год'
+[32mINFO    [0m root:BaseApp.py:114 We find text Утвержден in field Успешная проверка фильтрации по состоянию
+[32mINFO    [0m root:BaseApp.py:114 We find text 1 квартал 2054 года (нарастающий итог) in field Успешная проверка фильтрации по периоду
+[32mINFO    [0m root:test_new_filter_reports.py:59 Закончили тест проверки фильтрации на районном уровне
+[32mINFO    [0m root:BaseApp.py:139 Страница успешно перезагружена
