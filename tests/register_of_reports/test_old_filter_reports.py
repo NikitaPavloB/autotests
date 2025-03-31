@@ -3,10 +3,11 @@ import logging
 import allure
 import pytest
 import pytest_check as check
+from base.BaseApp import BasePage
 from tests.conftest import save_screenshot_on_check_fail
 from pages.register_of_reports.filter_old_reports_page import RegisterOldOperationsHelper
 
-pytest_mark = pytest.mark.order(1)
+pytestmark = pytest.mark.order(1)
 
 
 @allure.feature('Фильтрация в реестре отчетов - старая логика')
