@@ -1,4 +1,6 @@
 import logging
+
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
@@ -158,6 +160,75 @@ class BasePage:
             logging.error(f"Failed to select '{text}'")
         return result
 
+    # Метод проверки значений в формируемых таблицах аналитического конструктора
+    def get_table_data_and_compare(self, locator, mock_data):
+        try:
+            # Ожидание загрузки таблицы
+            table = self.find_element(locator, time=10, condition=EC.presence_of_element_located)
 
+            # Получение всех строк таблицы
+            rows = table.find_elements(By.TAG_NAME, "tr")
 
+            # Список для хранения данных из таблицы
+            table_data = []
 
+            # Извлечение данных из таблицы
+            for row in rows:
+                cells = row.find_elements(By.TAG_NAME, "td")
+                row_data = [cell.text for cell in cells]
+                if row_data:  # Игнорируем пустые строки (например, заголовки th)
+                    table_data.append(row_data)
+
+            # Получение ожидаемых данных(страницы с ожидаемыми результатами отдельным файлом создаем в папке mock)
+            mock_data = mock_data()
+
+            # Проверка данных
+            all_match = True
+            for i, row in enumerate(table_data):
+                for j, cell_value in enumerate(row):
+                    if cell_value != mock_data[i][j]:
+                        logging.error(f"Несоответствие в строке {i + 1}, столбце {j + 1}: "
+                                      f"Ожидалось '{mock_data[i][j]}', но получено '{cell_value}'")
+                        all_match = False
+
+            if all_match:
+                logging.info("Все данные таблицы соответствуют ожидаемым")
+            else:
+                logging.warning("Обнаружены расхождения в данных таблицы")
+
+            return all_match
+        except:
+            logging.exception("Ошибка при работе с таблицей")
+            return False
+
+    # Метод для работы с чекбоксом
+    def click_checkbox(self, locator, description=None, expected_state=True):
+        if description:
+            element_name = description
+        else:
+            element_name = locator
+
+        try:
+            checkbox = self.find_element(locator, time=10, condition=EC.element_to_be_clickable)
+            if not checkbox:
+                logging.error(f"Чекбокс {element_name} не найден или недоступен для клика")
+                return False
+
+            current_state = checkbox.is_selected()
+
+            if current_state != expected_state:
+                checkbox.click()
+                logging.info(
+                    f"Клик по чекбоксу {element_name}. Установлено состояние: {'выбран' if expected_state else 'не выбран'}")
+
+            new_state = checkbox.is_selected()
+            if new_state != expected_state:
+                logging.error(
+                    f"Состояние чекбокса {element_name} не изменилось как ожидалось. Текущее состояние: {'выбран' if new_state else 'не выбран'}")
+                return False
+
+            return True
+
+        except Exception as e:
+            logging.exception(f"Ошибка при работе с чекбоксом {element_name}")
+            return False
