@@ -7,7 +7,7 @@ from base.BaseApp import BasePage
 from tests.conftest import save_screenshot_on_check_fail
 from pages.register_of_reports.filter_new_reports_page import RegisterNewOperationsHelper
 
-pytest_mark = pytest.mark.order(2)
+pytestmark = pytest.mark.order(2)
 
 
 @allure.feature('Фильтрация в реестре отчетов - новая логика')
