@@ -115,6 +115,7 @@ def test_filter_district_level(browser):
         if not check.equal(test_page.get_check_district_lvl(),'Район', 'Проверка, что находимся на районном уровне'):
             save_screenshot_on_check_fail(browser, 'Проверка районного уровня')
     with allure.step("Выбор региона и района"):
+        time.sleep(3)
         test_page.click_region_field()
         test_page.click_msk_btn()
         time.sleep(3)
